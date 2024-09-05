@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Person {
 
     private static Integer id;
-    private String firstName;
+    private static String firstName;
     private String lastName;
 
 
@@ -28,7 +28,7 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstName() {
+    public static String getFirstName() {
         return firstName;
     }
 
