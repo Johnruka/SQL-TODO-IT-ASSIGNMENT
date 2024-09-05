@@ -3,6 +3,7 @@ package se.lexicon.DB;
 import se.lexicon.exception.DBConnectionException;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Connection {
@@ -19,5 +20,10 @@ public class Connection {
         } catch (SQLException e) {
             throw new DBConnectionException("Failed to connect to DB.");
         }
+    }
+
+
+    public PreparedStatement prepareStatement(String query) {
+        return null;
     }
 }
