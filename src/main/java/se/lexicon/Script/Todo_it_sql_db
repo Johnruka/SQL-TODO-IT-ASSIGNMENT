@@ -14,5 +14,5 @@ person_id int not null auto_increment primary key,
   deadline DATE NULL,
   done TINYINT NULL DEFAULT 0,
   assignee_id INT NULL,
-  foreign key (assignee_id) references todo_item(todo_id)
+  foreign key (assignee_id) references todo_item(assignee_id)
 );
