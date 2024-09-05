@@ -11,7 +11,7 @@ public class TodoItConnection {
     private static final String DB_NAME = "todo_it_sql_db";
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/" + DB_NAME;
     private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "78888";
+    private static final String JDBC_PASSWORD = "788083";
 
 
     public static Connection getConnection() {
