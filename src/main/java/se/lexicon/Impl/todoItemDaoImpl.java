@@ -4,14 +4,18 @@ import com.sun.tools.javac.comp.Todo;
 import se.lexicon.DB.Connection;
 import se.lexicon.Dao.TodoItemDao;
 import se.lexicon.exception.MySQLException;
+
 import se.lexicon.model.TodoItem;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
 
 import static se.lexicon.model.Person.getId;
 
@@ -60,9 +64,36 @@ public class todoItemDaoImpl implements TodoItemDao {
     }
 
     @Override
-    public Collection<Todo> findAll() {
-        return List.of();
+    public Optional<Object> findAll() {
+        String selectQuery = "SELECT * FROM todo_item";
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+            List<TodoItem> TodoItemList = new ArrayList<>();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from todo_item");
+
+
+            while (resultSet.next()) {
+                int TodoItemId = resultSet.getInt(1);
+                String title = resultSet.getString(2);
+                String description = resultSet.getString(3);
+
+                TodoItem todoItem = new TodoItem(TodoItemList.lastIndexOf(TodoItemId), title, description);
+                TodoItemList.add(todoItem);
+            }
+
+           TodoItemList.forEach(System.out::println);
+
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: ");
+            e.printStackTrace();
+        }
+
+
+        return Optional.empty();
     }
+
+
 
     @Override
     public Optional<TodoItem> findById() {

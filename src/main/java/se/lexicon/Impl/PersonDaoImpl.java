@@ -10,19 +10,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-import static java.time.temporal.TemporalAdjusters.next;
 import static se.lexicon.model.Person.getFirstName;
 
 
 public class PersonDaoImpl implements PersonDao {
 
-  private Person Person;
+    private Person Person;
     private Connection connection;
 
     public PersonDaoImpl(Connection connection) {
@@ -67,7 +66,7 @@ public class PersonDaoImpl implements PersonDao {
                 String firstName = resultSet.getString(2);
                 String lastName = resultSet.getString(3);
 
-                Person person  = new Person(PersonList.lastIndexOf(personId), firstName, lastName);
+                Person person = new Person(PersonList.lastIndexOf(personId), firstName, lastName);
                 PersonList.add(Person);
             }
 
@@ -92,8 +91,8 @@ public class PersonDaoImpl implements PersonDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    String firstName= ((ResultSet) resultSet).getString("firstName");
-                    String lastName =((ResultSet) resultSet).getString("lastName");
+                    String firstName = ((ResultSet) resultSet).getString("firstName");
+                    String lastName = ((ResultSet) resultSet).getString("lastName");
                     return Optional.of(new Person(getFirstName(), update().getLastName()));
                 }
             }

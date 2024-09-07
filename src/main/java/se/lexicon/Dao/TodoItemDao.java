@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface TodoItemDao {
 
     TodoItem create();
-    Collection<Todo> findAll();
+    Optional<Object> findAll();
     Optional<TodoItem> findById();
     Collection<Todo>findByDoneStatus();
     Optional<Integer> findByAssignee();
