@@ -6,18 +6,19 @@ public class Person {
 
     private static Integer id;
     private static String firstName;
-    private String lastName;
+    public static String lastName;
 
 
     public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        Person.firstName = firstName;
+        Person.lastName = lastName;
     }
 
     public Person(Integer id, String firstName, String lastName) {
-        this(firstName, lastName);
+        Person.firstName = firstName;
+        Person.lastName = lastName;
         if (id == null) throw new RuntimeException("id is null");
-        this.id = id;
+        Person.id = id;
     }
 
     public static Integer getId() {
@@ -25,27 +26,29 @@ public class Person {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        Person.id = id;
     }
 
     public static String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public String setFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty())
             throw new IllegalArgumentException("firstName is null or empty.");
-        this.firstName = firstName;
+        Person.firstName = firstName;
+        return firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public String setLastName(String lastName) {
         if (lastName == null || lastName.trim().isEmpty())
             throw new IllegalArgumentException("lastName is empty.");
-        this.lastName = lastName;
+        Person.lastName = lastName;
+        return lastName;
     }
 
     public String getSummary() {
@@ -57,7 +60,7 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName);
+        return true;
     }
 
     @Override

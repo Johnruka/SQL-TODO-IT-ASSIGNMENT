@@ -5,6 +5,7 @@ import se.lexicon.exception.DBConnectionException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Connection {
 
@@ -25,5 +26,9 @@ public class Connection {
 
     public PreparedStatement prepareStatement(String query) {
         return null;
+    }
+
+    public Statement createStatement() throws SQLException {
+        return getConnection().createStatement();
     }
 }
