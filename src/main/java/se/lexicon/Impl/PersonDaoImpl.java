@@ -15,7 +15,7 @@ import java.util.Optional;
 
 
 import static se.lexicon.model.Person.getFirstName;
-import static se.lexicon.model.Person.getId;
+
 
 public class PersonDaoImpl implements PersonDao {
 
@@ -35,7 +35,7 @@ public class PersonDaoImpl implements PersonDao {
 
         ) {
 
-            Person Person = new Person(getFirstName(),getFirstName());
+            Person Person = new Person(getFirstName(), person.getLastName());
             preparedStatement.setString(1, se.lexicon.model.Person.getFirstName());
             preparedStatement.setString(2, Person.getLastName());
             int affectedRows = preparedStatement.executeUpdate();
@@ -59,14 +59,14 @@ public class PersonDaoImpl implements PersonDao {
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
 
-            preparedStatement.setInt(1,2);
+            preparedStatement.setInt(1, 2);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     //getting username and title from result set and set it to a new Calendar object
                     String firstName= ((ResultSet) resultSet).getString("firstName");
-                    String lastName = resultSet.getString("lastName");
-                    return Optional.of(new Person(Person.getFirstName(),Person.getFirstName()));
+                    String lastName =((ResultSet) resultSet).getString("lastName");
+                    return Optional.of(new Person(getFirstName(), update().getLastName()));
                 }
             }
 
@@ -92,12 +92,12 @@ public class PersonDaoImpl implements PersonDao {
     public Boolean deleteById() {
         String query = "DELETE FROM Person WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1,2);
+            preparedStatement.setInt(1, 2);
 
             int rowsDeleted = preparedStatement.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {
-            String errorMessage = "Error occurred while deleting MeetingCalendar by ID: " + deleteById();
+            String errorMessage = "Error occurred while deleting person by ID: " + deleteById();
             throw new MySQLException(errorMessage, e);
         }
     }

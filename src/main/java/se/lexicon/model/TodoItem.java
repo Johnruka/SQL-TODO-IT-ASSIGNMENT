@@ -25,6 +25,17 @@ public class TodoItem {
 
     }
 
+    public TodoItem(int todoitemId, String title, String description) {
+        this(title, description);
+        this.id = id;
+    }
+
+    public TodoItem(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+
     public int getId() {
 
         return id;

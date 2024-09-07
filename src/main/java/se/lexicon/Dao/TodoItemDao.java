@@ -1,14 +1,16 @@
 package se.lexicon.Dao;
 
 import com.sun.tools.javac.comp.Todo;
+import se.lexicon.model.TodoItem;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface TodoItemDao {
 
-    Todo create();
+    TodoItem create();
     Collection<Todo> findAll();
-    Todo findById();
+    Optional<TodoItem> findById();
     Collection<Todo>findByDoneStatus();
     Collection<Todo>findByAssignee();
     Collection<Todo> findByUnassignedTodoItems();

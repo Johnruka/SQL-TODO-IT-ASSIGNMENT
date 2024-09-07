@@ -1,13 +1,18 @@
 package se.lexicon;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+
+import se.lexicon.DB.Connection;
+import se.lexicon.Dao.PersonDao;
+import se.lexicon.Dao.TodoItemDao;
+import se.lexicon.Impl.PersonDaoImpl;
+import se.lexicon.model.Person;
+
+public class App {
+
+    public static void main( String[] args ) {
+        Connection connection = (Connection) Connection.getConnection();
+        PersonDao PersonDao = new PersonDaoImpl(connection);
+        TodoItemDao TodoItemDao = new todoItemDaoImp
+
     }
 }
