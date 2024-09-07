@@ -31,7 +31,7 @@ public class todoItemDaoImpl implements TodoItemDao {
         String insertQuery = "INSERT INTO TodoItem (title, description) VALUES (?, ?)";
 
         try (
-                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
 
             preparedStatement.setString(1, todoItem.getTitle());
             preparedStatement.setString(2, todoItem.getDescription() );
@@ -79,7 +79,6 @@ public class todoItemDaoImpl implements TodoItemDao {
 
 
 
-                // Create a Meeting object with retrieved data
                 TodoItem todoItem = new TodoItem(id, title, description);
 
                 return Optional.of(todoItem);
@@ -97,8 +96,26 @@ public class todoItemDaoImpl implements TodoItemDao {
     }
 
     @Override
-    public Collection<Todo> findByAssignee() {
-        return List.of();
+    public Optional<Integer> findByAssignee() {
+        String query = "select * from users where username = ?";
+
+        try (
+                //Connection connection = OracleDBConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        ) {
+            preparedStatement.setInt(1, todoItem.getAssigneeId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int foundAssigneeId = resultSet.getInt("AssigneeId");
+
+                return Optional.of(foundAssigneeId);
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new MySQLException("Error occurred while finding foundAssignee by assigneeId: " + todoItem.getAssigneeId(), e);
+        }
     }
 
     @Override

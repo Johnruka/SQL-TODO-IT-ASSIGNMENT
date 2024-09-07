@@ -12,7 +12,7 @@ public interface TodoItemDao {
     Collection<Todo> findAll();
     Optional<TodoItem> findById();
     Collection<Todo>findByDoneStatus();
-    Collection<Todo>findByAssignee();
+    Optional<Integer> findByAssignee();
     Collection<Todo> findByUnassignedTodoItems();
     Todo update();
     boolean deleteById();
