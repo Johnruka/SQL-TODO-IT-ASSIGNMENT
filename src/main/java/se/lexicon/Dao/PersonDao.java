@@ -8,9 +8,12 @@ import java.util.Optional;
 public interface PersonDao {
 
     Person create(Person person);
+
     Optional<Object> findAll() throws SQLException;
+
     Optional<Person> findById();
+
     Optional<String> findByName();
-    Person update();
+
     Boolean deleteById();
 }

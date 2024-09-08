@@ -14,11 +14,9 @@ public interface TodoItemDao {
 
     Optional<TodoItem> findById();
 
-    Collection<Todo> findByDoneStatus();
 
     Optional<Integer> findByAssignee();
 
-    Collection<Todo> findByUnassignedTodoItems();
 
     boolean deleteById();
 }

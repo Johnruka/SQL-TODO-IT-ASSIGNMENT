@@ -120,10 +120,6 @@ public class todoItemDaoImpl implements TodoItemDao {
         return Optional.empty();
     }
 
-    @Override
-    public Collection<Todo> findByDoneStatus() {
-        return List.of();
-    }
 
     @Override
     public Optional<Integer> findByAssignee() {
@@ -146,11 +142,6 @@ public class todoItemDaoImpl implements TodoItemDao {
         } catch (SQLException e) {
             throw new MySQLException("Error occurred while finding foundAssignee by assigneeId: " + todoItem.getAssigneeId(), e);
         }
-    }
-
-    @Override
-    public Collection<Todo> findByUnassignedTodoItems() {
-        return List.of();
     }
 
 

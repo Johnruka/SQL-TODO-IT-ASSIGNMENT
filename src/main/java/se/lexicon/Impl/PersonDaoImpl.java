@@ -93,7 +93,7 @@ public class PersonDaoImpl implements PersonDao {
                 if (resultSet.next()) {
                     String firstName = ((ResultSet) resultSet).getString("firstName");
                     String lastName = ((ResultSet) resultSet).getString("lastName");
-                    return Optional.of(new Person(getFirstName(), update().getLastName()));
+                    return Optional.of(new Person(getFirstName(), Person.getLastName()));
                 }
             }
 
@@ -130,10 +130,6 @@ public class PersonDaoImpl implements PersonDao {
         }
     }
 
-    @Override
-    public Person update() {
-        return null;
-    }
 
     @Override
     public Boolean deleteById() {
