@@ -58,7 +58,7 @@ public class Person {
         return "Person ID: " + getId() + " Name: " + getFirstName() + " " + getLastName();
     }
 
-    private boolean validateAndAssignStringInput(String stringInput, String paramName) {
+    private Object validateAndAssignStringInput(String stringInput, String paramName) {
         if (stringInput == null || stringInput.trim().isEmpty()) {
             throw new IllegalArgumentException(paramName + " must not be null or empty");
         }
