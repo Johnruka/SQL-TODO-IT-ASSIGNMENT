@@ -1,6 +1,9 @@
 package se.lexicon.model;
 
+
 import java.util.Objects;
+
+
 
 public class Person {
 
@@ -55,13 +58,31 @@ public class Person {
         return "Person ID: " + getId() + " Name: " + getFirstName() + " " + getLastName();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return true;
+    private boolean validateAndAssignStringInput(String stringInput, String paramName) {
+        if (stringInput == null || stringInput.trim().isEmpty()) {
+            throw new IllegalArgumentException(paramName + " must not be null or empty");
+        }
+
+        switch (paramName) {
+            case "firstName":
+                firstName = stringInput;
+                break;
+            case "lastName":
+                lastName = stringInput;
+                break;
+        }
+
+        return false;
     }
+
+        @Override
+        public boolean equals (Object o){
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Person person = (Person) o;
+            return true;
+        }
+
 
     @Override
     public int hashCode() {

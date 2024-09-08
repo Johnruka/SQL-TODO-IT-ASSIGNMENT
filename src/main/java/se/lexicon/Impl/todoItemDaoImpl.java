@@ -30,6 +30,7 @@ public class todoItemDaoImpl implements TodoItemDao {
         this.connection = connection;
 
     }
+
     @Override
     public TodoItem create() {
         String insertQuery = "INSERT INTO TodoItem (title, description) VALUES (?, ?)";
@@ -38,7 +39,7 @@ public class todoItemDaoImpl implements TodoItemDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
 
             preparedStatement.setString(1, todoItem.getTitle());
-            preparedStatement.setString(2, todoItem.getDescription() );
+            preparedStatement.setString(2, todoItem.getDescription());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -49,8 +50,8 @@ public class todoItemDaoImpl implements TodoItemDao {
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    int TodoitemId = ((ResultSet) generatedKeys).getInt(1);
-                    return new TodoItem(TodoitemId, todoItem.getTitle(), todoItem.getDescription());
+                    int TodoItemId = ((ResultSet) generatedKeys).getInt(1);
+                    return new TodoItem(TodoItemId, todoItem.getTitle(), todoItem.getDescription());
                 } else {
                     String errorMessage = "Creating calendar failed, no ID obtained.";
                     throw new MySQLException(errorMessage);
@@ -82,7 +83,7 @@ public class todoItemDaoImpl implements TodoItemDao {
                 TodoItemList.add(todoItem);
             }
 
-           TodoItemList.forEach(System.out::println);
+            TodoItemList.forEach(System.out::println);
 
         } catch (SQLException e) {
             System.out.println("SQL Exception: ");
@@ -92,7 +93,6 @@ public class todoItemDaoImpl implements TodoItemDao {
 
         return Optional.empty();
     }
-
 
 
     @Override
@@ -107,7 +107,6 @@ public class todoItemDaoImpl implements TodoItemDao {
                 String title = resultSet.getString("title");
 
                 String description = resultSet.getString("_description");
-
 
 
                 TodoItem todoItem = new TodoItem(id, title, description);
@@ -154,10 +153,6 @@ public class todoItemDaoImpl implements TodoItemDao {
         return List.of();
     }
 
-    @Override
-    public Todo update() {
-        return null;
-    }
 
     @Override
     public boolean deleteById() {
@@ -169,9 +164,10 @@ public class todoItemDaoImpl implements TodoItemDao {
             int rowsDeleted = preparedStatement.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {
-            String errorMessage = "Error occurred while deleting todoItem by ID: " + getId() ;
+            String errorMessage = "Error occurred while deleting todoItem by ID: " + getId();
             throw new MySQLException(errorMessage, e);
         }
     }
-    }
+}
+
 

@@ -9,11 +9,16 @@ import java.util.Optional;
 public interface TodoItemDao {
 
     TodoItem create();
+
     Optional<Object> findAll();
+
     Optional<TodoItem> findById();
-    Collection<Todo>findByDoneStatus();
+
+    Collection<Todo> findByDoneStatus();
+
     Optional<Integer> findByAssignee();
+
     Collection<Todo> findByUnassignedTodoItems();
-    Todo update();
+
     boolean deleteById();
 }
